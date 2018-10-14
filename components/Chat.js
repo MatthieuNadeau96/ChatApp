@@ -10,7 +10,7 @@ class Chat extends React.Component {
     return (
       <View>
         <Text>
-          Hello Chat
+          Hello {this.props.userName}
         </Text>
       </View>
     )

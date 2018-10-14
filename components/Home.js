@@ -8,6 +8,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { Actions } from 'react-native-router-flux'
+
 class Home extends React.Component {
 
   state = {
@@ -32,8 +34,9 @@ class Home extends React.Component {
         />
       <TouchableOpacity
         onPress={() => {
-          alert(this.state.name)
-          // nav to the second screen, and to pass it the name
+          Actions.chat({
+            userName: this.state.name
+          })
         }}>
         <Text style={styles.buttonText}>
           Next
