@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import {
   View,
   Text,
@@ -16,5 +18,13 @@ class Chat extends React.Component {
     )
   }
 }
+
+Chat.defaultProps = {
+  userName: 'user1'
+};
+
+Chat.propTypes = {
+  userName: PropTypes.string
+};
 
 export default Chat;
