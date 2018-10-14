@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { GiftedChat } from 'react-native-gifted-chat';
+import Backend from '../Backend';
 
 class Chat extends React.Component {
 
@@ -9,17 +10,36 @@ class Chat extends React.Component {
     messages: []
   };
 
+  componentWillMount() {
+
+  }
+
   render() {
     return (
       <GiftedChat
         messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
+        onSend={messages => Backend.sendMessage(message)}
         user={{
-          _id: 1,
+          _id: Backend.getUid(),
+          name: this.props.userName
         }}
       />
     )
   }
+}
+
+componentDidMount() {
+  Backend.loadMessages((message) => {
+    this.setState((prevState) => {
+      return {
+        messages: GiftedChat.append(prevState.messages, message)
+      }
+    })
+  })
+}
+
+componentWillUnMount() {
+  Backend.closeChat();
 }
 
 Chat.defaultProps = {
